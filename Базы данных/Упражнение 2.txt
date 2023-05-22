@@ -1,0 +1,18 @@
+1. Запрос возвращает id и названия книг, находящихся в данный момент на руках у читателей.
+sqlite> SELECT id, title
+   ...> FROM Books
+   ...> INNER JOIN Records
+   ...>         ON Records.book_id = Books.id
+   ...> WHERE Records.returning_date IS NULL;
+2. Запрос возвращает имена читателей и названия книг, которые они когда-либо брали.
+sqlite> SELECT name, title
+   ...> FROM Readers
+   ...> INNER JOIN Records
+   ...>         ON Readers.id = Records.reader_id
+   ...> INNER JOIN Books
+   ...>         ON Records.book_id = Books.id
+   ...> ;
+3. Запрос возвращает количество книг для каждого автора.
+sqlite> SELECT author, COUNT(id)
+   ...> FROM Books
+   ...> GROUP BY author;
